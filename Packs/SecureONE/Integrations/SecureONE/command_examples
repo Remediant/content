@@ -1,0 +1,3 @@
+!secureone-get-machine-risk machine_name="THRASH1" domain_name="RTEST"
+!secureone-get-account-risk account_name="THRASH1"  domain_name="RTEST"
+!secureone-get-group-risk group_name="THRASH1"  domain_name="RTEST"

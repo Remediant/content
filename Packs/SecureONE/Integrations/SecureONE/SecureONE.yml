@@ -1,0 +1,307 @@
+category: Utilities
+commonfields:
+  id: SecureONE
+  version: -1
+configuration:
+- defaultvalue: https://51a07c94-8790-474d-b51d-cf6ff4cdb0ed.mock.pstmn.io/
+  display: Your server URL
+  name: url
+  required: true
+  type: 0
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+defaultMapperIn: 'null'
+defaultMapperOut: 'null'
+defaultclassifier: 'null'
+description: Analyze jita accounts on a compromised machine and further analyze risk
+  the accounts pose to the organization
+display: SecureONE
+name: SecureONE
+script:
+  commands:
+  - arguments:
+    - default: false
+      description: Name of the machine
+      isArray: false
+      name: machine_name
+      required: true
+      secret: false
+    - default: false
+      description: Machine domain (Could be left blank if none)
+      isArray: false
+      name: domain_name
+      required: false
+      secret: false
+    - default: false
+      isArray: false
+      required: false
+      secret: false
+    deprecated: false
+    description: Get all accounts on the compromised machine
+    execution: false
+    name: secureone-get-machine-risk
+    outputs:
+    - contextPath: Secureone.Sessions.machine_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.machine_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts
+      description: List of accounts with JITA sessions
+      type: Array
+    - contextPath: Secureone.Sessions.accounts.account_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.account_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.sid
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.account_history
+      description: Machine Id on which search is performed
+      type: Array
+    - contextPath: Secureone.Sessions.accounts.access_history.access_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.access_history.access_start_date
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.access_history.access_end_date
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.access_history.session_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.access_history.session_active
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.access_via
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.group_path
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.list_access_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.list_access_start_date
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.list_access_end_date
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.list_jita_active
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.workstation_count
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Sessions.accounts.server_count
+      description: Machine Id on which search is performed
+      type: String
+  - arguments:
+    - default: false
+      description: Account name to be analysed
+      isArray: false
+      name: account_name
+      required: true
+      secret: false
+    - default: false
+      description: Account Domain (Blank if not present)
+      isArray: false
+      name: domain_name
+      required: true
+      secret: false
+    deprecated: false
+    description: Get account risk of the organization
+    execution: false
+    name: secureone-get-account-risk
+    outputs:
+    - contextPath: Secureone.Access.account_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.sid
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.account_name
+      description: List of accounts with JITA sessions
+      type: Array
+    - contextPath: Secureone.Access.machines.system_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.machines.system_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.machines.system_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.machines.access_type
+      description: Machine Id on which search is performed
+      type: Array
+    - contextPath: Secureone.Access.machines.access_history.access_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.machines.access_history.access_start_date
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.machines.access_history.access_end_date
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.machines.access_history.session_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.machines.access_history.session_active
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.group_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.group_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.description
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.domain_fqdn
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.domain_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.objectSid
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.domainandname
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.Access.groups.machine_count
+      description: Machine Id on which search is performed
+      type: String
+  - arguments:
+    - default: false
+      description: Group Name
+      isArray: false
+      name: group
+      required: true
+      secret: false
+    - default: false
+      description: Group Domain (Blank if not present)
+      isArray: false
+      name: domain_name
+      required: true
+      secret: false
+    deprecated: false
+    description: Get the risk of impacted group
+    execution: false
+    name: secureone-get-group-risk
+    outputs:
+    - contextPath: Secureone.GroupAccess.group_id
+      description: Name of the account
+      type: String
+    - contextPath: Secureone.GroupAccess.group_name
+      description: Group Name
+      type: String
+    - contextPath: Secureone.GroupAccess.description
+      description: Group Description
+      type: Array
+    - contextPath: Secureone.GroupAccess.accounts.account_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.account_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.account_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.sid
+      description: Machine Id on which search is performed
+      type: Array
+    - contextPath: Secureone.GroupAccess.accounts.last_access_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.last_access_start_time
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.last_access_end_time
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.last_jita_active
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.workstation_count
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.server_count
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.accounts.access_via
+      description: Machine Id on which search is performed
+      type: Array
+    - contextPath: Secureone.GroupAccess.accounts.group_list
+      description: Machine Id on which search is performed
+      type: Array
+    - contextPath: Secureone.GroupAccess.nested_groups.group_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.group_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.description
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.domain_fqdn
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.domain_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.objectSid
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.domainandname
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.machine_count
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.nested_groups.user_count
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.machines.system_name
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.machines.system_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.machines.system_id
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.machines.access_type
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.machines.access_date
+      description: Machine Id on which search is performed
+      type: String
+    - contextPath: Secureone.GroupAccess.machines.access_history
+      description: Machine Id on which search is performed
+      type: Array
+  dockerimage: demisto/python3:3.9.1.15759
+  feed: false
+  isfetch: false
+  longRunning: false
+  longRunningPort: false
+  runonce: false
+  script: '-'
+  subtype: python3
+  type: python
+tests:
+- No tests (auto formatted)
+fromversion: 5.5.0
